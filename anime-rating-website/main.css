@@ -24,6 +24,29 @@ nav
 	border-radius: 20px;
 }
 
+.btn-light:hover
+{
+	background-color: #576beb;
+	border-color: #576beb;
+	color: #fff;
+}
+
+.btn-search
+{
+	background-color: #576beb; 
+	color: #fff;
+	padding: 10px;
+	border-radius: 25px;
+	width: 100px;
+}
+
+.btn-search:hover
+{
+	background-color: #d7dbf5;
+	border-color: #d7dbf5;
+	color: #000;
+}
+
 .divider
 {
 	background: #576beb; 

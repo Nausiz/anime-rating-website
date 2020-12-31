@@ -58,16 +58,16 @@ input[type="checkbox"]{
 
 input[type="submit"]{
 	border: 2px solid #fff;
-	background-color: #d7dbf5;
+	background-color: #576beb; 
 	color: #fff;
 	font-size: 14px;
 	font-weight: 700;
 }
 
 input[type="submit"]:hover{
-	border: 2px solid #d7dbf5;
+	border: 2px solid #576beb; 
 	background-color: #fff;
-	color: #d7dbf5;
+	color: #576beb; 
 }
 
 a{
