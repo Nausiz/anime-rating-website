@@ -12,27 +12,33 @@
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
 	<link rel="shortcut icon" type="image/ico" href="img/icon.ico"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="loginRegister.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 	<script src="https://kit.fontawesome.com/e6c92d3f6a.js" crossorigin="anonymous"></script>
 	
 </head>
 
 <body>
-
-	<header>
-
 	
-	</header>
-	
-	<main>
-	
-		
+	<main class="row">
+		<div class="col-10 FormContainer m-auto">
+			<div class="Form text-center">
+				<div>
+					<form class="d-inline-block my-5 align-items-center">
+						<input type="email" placeholder="Adres e-mail"/>
+						<input type="password" placeholder="Hasło"/>
+						<input type="password" placeholder="Powtórz hasło"/>
+						<label style="width: 50%; height: auto; font-size:9px;">
+						<input class="input" id="Regu" style="margin: 5px; width:15px; height: 15px;" type="checkbox"/>Zakładając konto akceptujesz warunki <a href="#" style="color: #000; font-weight:bold;">regulaminu</a> oraz naszą <a href="#" style="color: #000; font-weight:bold;">politykę prywatności</a>
+						</label><br/>
+						<input id="Sub" type="submit" value="Zarejestruj"/>
+					</form>
+					<p style="font-size: 10px; opacity:0.5; text-align: center;" class="mt-2">Posiadasz konto? <a href="login.html"><b>Zaloguj się</b></a></p>
+				</div>
+			</div>
+		</div>
 	</main>
-	
-	<footer>
-	
-	</footer>
 	
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity "sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
