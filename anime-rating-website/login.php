@@ -42,7 +42,7 @@
 							<div></div>
 							<div style="flex-grow: 1;">
 								<label style="font-size:11px; opacity: 0.5; padding-right:10px;">
-									<input style="width:15px; height: 15px;" type="checkbox" name="rememberMe" />Zapamiętaj mnie
+									<input style="width:15px; height: 15px;" type="checkbox" name="remember" />Zapamiętaj mnie
 								</label>
 							</div>
 							<div style="flex-grow: 1;">

@@ -22,26 +22,33 @@
 		$password = $_POST['password'];
 		
 		$email = htmlentities($email, ENT_QUOTES, "UTF-8");
-		$password = htmlentities($password, ENT_QUOTES, "UTF-8");
 		
 		if ($result = @$connect->query(
-		sprintf("SELECT * FROM users WHERE email='%s' AND password='%s'",
-		mysqli_real_escape_string($connect,$email),
-		mysqli_real_escape_string($connect,$password))))
+		sprintf("SELECT * FROM users WHERE email='%s'",
+		mysqli_real_escape_string($connect,$email))))
 		{
-			$ilu_userow = $result->num_rows;
-			if($ilu_userow>0)
+			$users = $result->num_rows;
+			if($users>0)
 			{
-				$_SESSION['logged'] = true;
+				$row = $result->fetch_assoc();
 				
-				$wiersz = $result->fetch_assoc();
-				$_SESSION['id'] = $wiersz['id'];
-				$_SESSION['email'] = $wiersz['email'];
-				$_SESSION['password'] = $wiersz['password'];
+				if (password_verify($password, $row['password']))
+				{
+					$_SESSION['logged'] = true;
 				
-				unset($_SESSION['error']);
-				$result->free_result();
-				header('Location: myList.php');
+					$_SESSION['id'] = $row['id'];
+					$_SESSION['email'] = $row['email'];
+					$_SESSION['password'] = $row['password'];
+					
+					unset($_SESSION['error']);
+					$result->free_result();
+					header('Location: myList.php');
+				}
+				else 
+				{
+					$_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+					header('Location: login.php');
+				}
 				
 			} else {
 				

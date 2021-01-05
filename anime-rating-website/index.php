@@ -65,7 +65,7 @@
 					echo 			'<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="color: #f1f1f1">'.$_SESSION['email'].'</a>';
 							
 					echo			'<div class="dropdown-menu" aria-labelledby="dropdown07">';
-					echo				'<a class="dropdown-item active" href="myList.php">Moja lista</a>';
+					echo				'<a class="dropdown-item" href="myList.php">Moja lista</a>';
 					echo				'<a class="dropdown-item" href="ratedAnime.php">Ocenione</a>';
 					echo				'<a class="dropdown-item" href="logout.php" style="color: red;">Wyloguj</a>';
 					echo			'</div>';
