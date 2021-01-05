@@ -10,7 +10,6 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="">
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
-	<link rel="shortcut icon" type="image/ico" href="img/icon.ico"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
@@ -30,13 +29,13 @@
 			<div class="navbar-collapse justify-content-md-center collapse">
 			  <ul class="navbar-nav">
 				<li class="nav-item active">
-				  <a class="nav-link" href="index.html">Strona główna<span class="sr-only">(current)</span></a>
+				  <a class="nav-link" href="index.php">Strona główna<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="animeList.html">Baza anime</a>
+				  <a class="nav-link" href="animeList.php">Baza anime</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="ranking.html">Ranking</a>
+				  <a class="nav-link" href="ranking.php">Ranking</a>
 				</li>
 				<li class="nav-item">
 					<form class="form-inline my-2 my-md-0 ml-auto">
@@ -46,10 +45,37 @@
 			  </ul>
 			</div>
 			
-			<div class="my-2 my-md-0 ml-auto">
-				<a href="login.html" class="btn btn-light mr-2" >Zaloguj</a>
-				<a href="register.html" class="btn btn-light mr-2">Zarejestruj</a>
-			</div>
+			<?php
+
+				session_start();
+				
+				if (!isset($_SESSION['logged']))
+				{
+					echo '<div class="my-2 my-md-0 ml-auto">';
+					echo	'<a href="login.php" class="btn btn-light mr-2" >Zaloguj</a>';
+					echo	'<a href="register.php" class="btn btn-light mr-2">Zarejestruj</a>';
+					echo '</div>';
+				}
+				else if (isset($_SESSION['logged']))
+				{
+					echo '<div class="ml-auto">';
+					echo	'<ul class="navbar-nav">';
+					echo		'<li class="nav-item dropdown">';
+							
+					echo 			'<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="color: #f1f1f1">'.$_SESSION['email'].'</a>';
+							
+					echo			'<div class="dropdown-menu" aria-labelledby="dropdown07">';
+					echo				'<a class="dropdown-item active" href="myList.php">Moja lista</a>';
+					echo				'<a class="dropdown-item" href="ratedAnime.php">Ocenione</a>';
+					echo				'<a class="dropdown-item" href="logout.php" style="color: red;">Wyloguj</a>';
+					echo			'</div>';
+					echo		'</li>';
+					echo	'</ul>';
+					echo '</div>';
+				}
+				
+			?>
+			
 		</nav>
 	</header>
 	
@@ -64,13 +90,13 @@
 				  </ol>
 				  <div class="carousel-inner">
 					<div class="carousel-item active">
-					   <a href="animeDescription.html"><img class="d-block w-100" src="img/slide1.jpg" alt="First slide"></a>
+					   <a href="animeDescription.php"><img class="d-block w-100" src="img/slide1.jpg" alt="First slide"></a>
 					</div>
 					<div class="carousel-item">
-					   <a href="animeDescription.html"><img class="d-block w-100" src="img/slide2.jpg" alt="Second slide"></a>
+					   <a href="animeDescription.php"><img class="d-block w-100" src="img/slide2.jpg" alt="Second slide"></a>
 					</div>
 					<div class="carousel-item">
-					  <a href="animeDescription.html"><img class="d-block w-100" src="img/slide3.jpg" alt="Third slide"></a>
+					  <a href="animeDescription.php"><img class="d-block w-100" src="img/slide3.jpg" alt="Third slide"></a>
 					</div>
 				  </div>
 				  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -109,21 +135,21 @@
 							<img src="img/slide1.jpg" class="img-fluid">
 							<figcaption><p class="mt-4" style="font-size:14px; font-weight: 800;">LOREM IPSUM DOLOR SIT AMET,</p><p style="font-size:14px; font-weight: 500;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec consectetur purus, eget sodales orci. Nam vel malesuada neque. Nam pulvinar pharentra pellentresque. Pellentresque a leo non elit viverra cursus in sit amet arcu.</p>
 
-							<a href="animeDescription.html"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
+							<a href="animeDescription.php"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
 						</figure>
 						
 						<figure class="col-sm-9 col-md-5 col-lg-3 mx-auto">
 							<img src="img/slide2.jpg" class="img-fluid">
 							<figcaption><p class="mt-4" style="font-size:14px; font-weight: 800;">LOREM IPSUM DOLOR SIT AMET,</p><p style="font-size:14px; font-weight: 500;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec consectetur purus, eget sodales orci. Nam vel malesuada neque. Nam pulvinar pharentra pellentresque. Pellentresque a leo non elit viverra cursus in sit amet arcu.</p>
 
-							<a href="animeDescription.html"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
+							<a href="animeDescription.php"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
 						</figure>
 						
 						<figure class="col-sm-9 col-md-5 col-lg-3 mx-auto">
 							<img src="img/slide3.jpg" class="img-fluid">
 							<figcaption><p class="mt-4" style="font-size:14px; font-weight: 800;">LOREM IPSUM DOLOR SIT AMET,</p><p style="font-size:14px; font-weight: 500;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec consectetur purus, eget sodales orci. Nam vel malesuada neque. Nam pulvinar pharentra pellentresque. Pellentresque a leo non elit viverra cursus in sit amet arcu.</p>
 
-								<a href="animeDescription.html"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
+								<a href="animeDescription.php"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
 						</figure>
 					</div>
 				</div>
@@ -150,7 +176,7 @@
 	  </div>
 	  <div class="text-center p-3 text-light" style="background-color: #202120;">
 		© 2020 Copyright:
-		<a class="text-light" href="index.html">anime-rating-website.com</a>
+		<a class="text-light" href="index.php">anime-rating-website.com</a>
 	  </div>
 	</footer>
 	

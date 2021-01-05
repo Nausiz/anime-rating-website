@@ -5,12 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<title>Anime rating - moja lista</title>
+	<title>Anime rating - ranking</title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="">
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
-	<link rel="shortcut icon" type="image/ico" href="img/icon.ico"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
@@ -30,13 +29,13 @@
 			<div class="navbar-collapse justify-content-md-center collapse">
 			  <ul class="navbar-nav">
 				<li class="nav-item">
-				  <a class="nav-link" href="index.html">Strona główna<span class="sr-only">(current)</span></a>
+				  <a class="nav-link" href="index.php">Strona główna<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="animeList.html">Baza anime</a>
+				  <a class="nav-link" href="animeList.php">Baza anime</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="ranking.html">Ranking</a>
+				  <a class="nav-link active" href="ranking.php">Ranking</a>
 				</li>
 				<li class="nav-item">
 					<form class="form-inline my-2 my-md-0 ml-auto">
@@ -46,17 +45,36 @@
 			  </ul>
 			</div>
 			
-			<div class="ml-auto">
-				<ul class="navbar-nav">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="color: #f1f1f1">Nazwa użytkownika</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown07">
-							<a class="dropdown-item active" href="myList.html">Moja lista</a>
-							<a class="dropdown-item" href="ratedAnime.html">Ocenione</a>
-						</div>
-					</li>
-				</ul>
-			</div>
+			<?php
+
+				session_start();
+				
+				if (!isset($_SESSION['logged']))
+				{
+					echo '<div class="my-2 my-md-0 ml-auto">';
+					echo	'<a href="login.php" class="btn btn-light mr-2" >Zaloguj</a>';
+					echo	'<a href="register.php" class="btn btn-light mr-2">Zarejestruj</a>';
+					echo '</div>';
+				}
+				else if (isset($_SESSION['logged']))
+				{
+					echo '<div class="ml-auto">';
+					echo	'<ul class="navbar-nav">';
+					echo		'<li class="nav-item dropdown">';
+							
+					echo 			'<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="color: #f1f1f1">'.$_SESSION['email'].'</a>';
+							
+					echo			'<div class="dropdown-menu" aria-labelledby="dropdown07">';
+					echo				'<a class="dropdown-item active" href="myList.php">Moja lista</a>';
+					echo				'<a class="dropdown-item" href="ratedAnime.php">Ocenione</a>';
+					echo				'<a class="dropdown-item" href="logout.php" style="color: red;">Wyloguj</a>';
+					echo			'</div>';
+					echo		'</li>';
+					echo	'</ul>';
+					echo '</div>';
+				}
+				
+			?>
 		</nav>
 	</header>
 	
@@ -66,14 +84,14 @@
 			<section class="py-5">
 				<div class="row">
 					<div class="col-12">
-						<a style="font-size: 12px; color: #000; text-decoration: none; margin-right: 15px;" href="index.html">Strona główna</a>
+						<a style="font-size: 12px; color: #000; text-decoration: none; margin-right: 15px;" href="index.php">Strona główna</a>
 						<i class="fas fa-chevron-right"></i>
-						<text style="font-weight:bold; font-size:12px; margin-left: 15px;">Moja lista</text>
+						<text style="font-weight:bold; font-size:12px; margin-left: 15px;">Ranking</text>
 					</div>
 				</div>
 			</section>
 			<section class="col-xl-8 pb-4">
-				<h3 class="my-4" style="font-weight: 700;">Moja lista</h3>
+				<h3 class="my-4" style="font-weight: 700;">Ranking</h3>
 				<p class="mb-4" style="font-size:15px; font-weight: 700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac pretium nunc. Cras blandit non eros in interdum. Donec quis venenatis leo. Vestbulum condimentum</p>
 			</section>
 			<section class="col-12 pb-4">
@@ -88,13 +106,6 @@
 								<option value="drama">Dramat</option>
 								<option value="fantasy">Fantasy</option>
 							</select>
-						</div>
-						<div class="col-md-6" style="margin-top: 20px;">
-							<label for="about">Filtruj po:</label>
-							<select name="about" id="about" style="border:0; outline:0; background-color:#fff;">
-								<option value="date">Dacie dodania</option>
-								<option value="rating">Ocenie</option>
-							</select>
 						</div>	
 					</div>
 				</form>
@@ -108,9 +119,8 @@
 							<i class="fas fa-plus-circle"></i>
 						</span>
 					</div>
-					<div class="my-auto"><a href="animeDescription.html" style="font-weight: 700;">Sword Art Online</a></div>
+					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>1. </span>Sword Art Online</a></div>
 					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">Data: <span>31.12.2020</span></div>
 				</div>
 					
 				<div class="divider"></div>
@@ -122,51 +132,29 @@
 							<i class="fas fa-plus-circle"></i>
 						</span>
 					</div>
-					<div class="my-auto"><a href="animeDescription.html" style="font-weight: 700;">Sword Art Online</a></div>
+					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>2. </span>Sword Art Online</a></div>
 					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">Data: <span>31.12.2020</span></div>
 				</div>
 					
 				<div class="divider"></div>
 				
 				<div class="row d-flex justify-content-around">
-					<div class="my-auto">
-						<span class="checkboxAddToList">
-							<input class="checkboxAddToList-element" type="checkbox"/>  
-							<i class="fas fa-plus-circle"></i>
-						</span>
-					</div>
-					<div class="my-auto"><a href="animeDescription.html" style="font-weight: 700;">Sword Art Online</a></div>
+					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>3. </span>Sword Art Online</a></div>
 					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">Data: <span>31.12.2020</span></div>
 				</div>
 					
 				<div class="divider"></div>
 				
 				<div class="row d-flex justify-content-around">
-					<div class="my-auto">
-						<span class="checkboxAddToList">
-							<input class="checkboxAddToList-element" type="checkbox"/>  
-							<i class="fas fa-plus-circle"></i>
-						</span>
-					</div>
-					<div class="my-auto"><a href="animeDescription.html" style="font-weight: 700;">Sword Art Online</a></div>
+					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>4. </span>Sword Art Online</a></div>
 					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">Data: <span>31.12.2020</span></div>
 				</div>
 					
 				<div class="divider"></div>
 				
 				<div class="row d-flex justify-content-around">
-					<div class="my-auto">
-						<span class="checkboxAddToList">
-							<input class="checkboxAddToList-element" type="checkbox"/>  
-							<i class="fas fa-plus-circle"></i>
-						</span>
-					</div>
-					<div class="my-auto"><a href="animeDescription.html" style="font-weight: 700;">Sword Art Online</a></div>
+					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>5. </span>Sword Art Online</a></div>
 					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">Data: <span>31.12.2020</span></div>
 				</div>
 					
 				<div class="divider"></div>
@@ -178,7 +166,7 @@
 	<footer class="text-center text-lg-start" style="background-color: #e3e3e3;">
 	  <div class="text-center p-3 text-light" style="background-color: #202120;">
 		© 2020 Copyright:
-		<a class="text-light" href="index.html">anime-rating-website.com</a>
+		<a class="text-light" href="index.php">anime-rating-website.com</a>
 	  </div>
 	</footer>
 	

@@ -10,7 +10,6 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="">
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
-	<link rel="shortcut icon" type="image/ico" href="img/icon.ico"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="loginRegister.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
@@ -34,7 +33,7 @@
 						</label><br/>
 						<input id="Sub" type="submit" value="Zarejestruj"/>
 					</form>
-					<p style="font-size: 10px; opacity:0.5; text-align: center;" class="mt-2">Posiadasz konto? <a href="login.html"><b>Zaloguj się</b></a></p>
+					<p style="font-size: 10px; opacity:0.5; text-align: center;" class="mt-2">Posiadasz konto? <a href="login.php"><b>Zaloguj się</b></a></p>
 				</div>
 			</div>
 		</div>

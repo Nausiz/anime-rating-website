@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+
+	session_start();
+	
+	if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
+	{
+		header('Location: myList.php');
+		exit();
+	}
+?>
+
+<!DOCTYPE HTML>
 <html lang="pl">
 <head>
 
@@ -10,7 +21,6 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="">
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
-	<link rel="shortcut icon" type="image/ico" href="img/icon.ico"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="loginRegister.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
@@ -25,14 +35,14 @@
 		<div class="col-10 FormContainer m-auto">
 			<div class="Form text-center">
 				<div>
-					<form class="d-inline-block my-5 align-items-center">
-						<input type="email" placeholder="Adres e-mail" />
-						<input type="password" placeholder="Hasło" />
+					<form action="loginPhp.php" method="post" class="d-inline-block my-5 align-items-center">
+						<input type="email" name="email" placeholder="Adres e-mail" />
+						<input type="password" name="password" placeholder="Hasło" />
 						<div class="underInputs">
 							<div></div>
 							<div style="flex-grow: 1;">
 								<label style="font-size:11px; opacity: 0.5; padding-right:10px;">
-									<input style="width:15px; height: 15px;" type="checkbox" />Zapamiętaj mnie
+									<input style="width:15px; height: 15px;" type="checkbox" name="rememberMe" />Zapamiętaj mnie
 								</label>
 							</div>
 							<div style="flex-grow: 1;">
@@ -43,8 +53,11 @@
 						</div>
 						<input type="submit" value="Zaloguj" />
 					</form>
+<?php
+	if(isset($_SESSION['error']))	echo $_SESSION['error'];
+?>
 					<p class="mt-4" style="font-size: 10px; position: relative; opacity:0.5; text-align: center;">Nie
-						masz jeszcze konta? <a href="register.html"><b>Zarejestruj się</b></a></p>
+						masz jeszcze konta? <a href="register.php"><b>Zarejestruj się</b></a></p>
 				</div>
 			</div>
 		</div>
