@@ -6,7 +6,6 @@ if (!isset($_SESSION['logged'])) {
 	header('Location: index.php');
 	exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -119,23 +118,27 @@ if (!isset($_SESSION['logged'])) {
 					echo "Error: " . $connect->connect_errno;
 				} else {
 
-
+					$userId = $_SESSION['id'];
 					if (isset($_GET['categories'])) {
-						$selected_cat = $_GET['categories'];
+						
+						$selected_cat = $_GET['categories'];					
 
-						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID, listedanime.id as id
-							FROM anime						
-							INNER JOIN categories ON anime.categoryID=categories.ID
-							INNER JOIN listedanime ON anime.id=listedanime.animeID
-							INNER JOIN users ON users.id=listedanime.userID
-							WHERE categoryID = $selected_cat;";
+						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID, listedanime.id as id, listedanime.userID as usid
+						FROM listedanime
+						INNER JOIN anime ON listedanime.animeID = anime.id
+						INNER JOIN categories ON anime.categoryID = categories.id
+						WHERE listedanime.userID = $userId AND categoryID = $selected_cat;";
+
 					} else {
 
-						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, listedanime.id as id
-						FROM anime
-						INNER JOIN categories ON anime.categoryID=categories.ID
-						INNER JOIN listedanime ON anime.id=listedanime.animeID
-						INNER JOIN users ON users.id=listedanime.userID;";
+						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, listedanime.id as id, listedanime.userID as usid
+						FROM listedanime
+						INNER JOIN anime ON listedanime.animeID = anime.id
+						INNER JOIN categories ON anime.categoryID = categories.id
+						WHERE listedanime.userID = $userId;";
+						
+						
+						
 					}
 
 					if(isset($_POST['id']))
@@ -155,9 +158,11 @@ if (!isset($_SESSION['logged'])) {
 
 
 					if (mysqli_num_rows($result) > 0) {
-						// show anime list for guests
+						
 
-						while ($row = mysqli_fetch_assoc($result)) {							
+						while ($row = mysqli_fetch_assoc($result)) {
+							echo $row["id"];							
+							echo"\t";
 							echo
 								"<form method=post>
 								<div class='row text-center'>
