@@ -160,27 +160,27 @@
 						while ($row = mysqli_fetch_assoc($result))
 							{
 							echo
-								"<div class='row d-flex justify-content-around'>
+								"<div class='row text-center'>
 
 
-					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+									<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 
-					<div class='my-auto'>
-						<fieldset class='rating'>
-							<input type='radio' id='star5' name='rating' value='5' /><label class='full' for='star5'></label>
-							<input type='radio' id='star4half' name='rating' value='4 and a half' /><label class='half' for='star4half'></label>
-							<input type='radio' id='star4' name='rating' value='4' /><label class='full' for='star4'></label>
-							<input type='radio' id='star3half' name='rating' value='3 and a half' /><label class='half' for='star3half'></label>
-							<input type='radio' id='star3' name='rating' value='3' /><label class='full' for='star3'></label>
-							<input type='radio' id='star2half' name='rating' value='2 and a half' /><label class='half' for='star2half'></label>
-							<input type='radio' id='star2' name='rating' value='2' /><label class='full' for='star2'></label>
-							<input type='radio' id='star1half' name='rating' value='1 and a half' /><label class='half' for='star1half'></label>
-							<input type='radio' id='star1' name='rating' value='1' /><label class='full' for='star1'></label>
-							<input type='radio' id='starhalf' name='rating' value='half' /><label class='half' for='starhalf'></label>
-						</fieldset>
-					</div>
-				</div>
+									<div class='col-md-4'>
+										<fieldset class='rating'>
+											<input type='radio' id='star5' name='rating' value='5' /><label class='full' for='star5'></label>
+											<input type='radio' id='star4half' name='rating' value='4 and a half' /><label class='half' for='star4half'></label>
+											<input type='radio' id='star4' name='rating' value='4' /><label class='full' for='star4'></label>
+											<input type='radio' id='star3half' name='rating' value='3 and a half' /><label class='half' for='star3half'></label>
+											<input type='radio' id='star3' name='rating' value='3' /><label class='full' for='star3'></label>
+											<input type='radio' id='star2half' name='rating' value='2 and a half' /><label class='half' for='star2half'></label>
+											<input type='radio' id='star2' name='rating' value='2' /><label class='full' for='star2'></label>
+											<input type='radio' id='star1half' name='rating' value='1 and a half' /><label class='half' for='star1half'></label>
+											<input type='radio' id='star1' name='rating' value='1' /><label class='full' for='star1'></label>
+											<input type='radio' id='starhalf' name='rating' value='half' /><label class='half' for='starhalf'></label>
+										</fieldset>
+									</div>
+								</div>
 
 				<div class='divider'></div>";
 							}

@@ -159,11 +159,11 @@
 							while ($row = mysqli_fetch_assoc($result)) {
 
 								echo
-									"<div class='row d-flex justify-content-around'>
-							<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-						<div class='my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
-						</div>
+									"<div class='row text-center'>
+										<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+										<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+										<div class='col-4'>Kategoria: <span>" . $row["category"] . "</span></div>
+									</div>
 					
 				<div class='divider'></div>";
 							}
@@ -174,18 +174,18 @@
 							while ($row = mysqli_fetch_assoc($result))
 							{
 							echo
-								"<div class='row d-flex justify-content-around'>
-					<div class='my-auto'>
+								"<div class='row text-center'>
+					<div class='col-1'>
 						<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
 							<i class='fas fa-plus-circle'></i>
 						</button>
 					</div>
 
-					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-						<div class='my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
+					<div class='col-3'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+					<div class='col-3'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+					<div class='col-2'>Kategoria: <span>" . $row["category"] . "</span></div>
 
-					<div class='my-auto'>
+					<div class='col-lg-3'>
 						<fieldset class='rating'>
 							<input type='radio' id='star5' name='rating' value='5' /><label class='full' for='star5'></label>
 							<input type='radio' id='star4half' name='rating' value='4 and a half' /><label class='half' for='star4half'></label>

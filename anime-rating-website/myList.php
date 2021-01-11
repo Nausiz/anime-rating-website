@@ -152,17 +152,17 @@ if (!isset($_SESSION['logged'])) {
 
 						while ($row = mysqli_fetch_assoc($result)) {
 							echo
-								"<div class='row d-flex justify-content-around'>
-					<div class='my-auto'>
-						<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
-							<i class='fas fa-minus-circle'></i>
-						</button>
-					</div>
+								"<div class='row text-center'>
+									<div class='col-1'>
+										<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
+											<i class='fas fa-minus-circle'></i>
+										</button>
+									</div>
 
-					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-						<div class='my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
-				</div>
+									<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+									<div class='col-3'>Kategoria: <span>" . $row["category"] . "</span></div>
+								</div>
 
 				<div class='divider'></div>";
 						}
