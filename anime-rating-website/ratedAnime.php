@@ -92,7 +92,8 @@
 			<section class="col-12 pb-4">
 				<form>
 					<div style="margin-top: 20px; margin-bottom: 20px;" class="row">
-						<div class="col-md-6" style="margin-top: 20px;">
+
+						<!--<div class="col-md-6" style="margin-top: 20px;">
 							<label for="categories">Filtruj kategorie:</label>
 							<select name="categories" id="categories" style="border:0; outline:0; background-color:#fff;">
 								<option value="action">Akcja</option>
@@ -102,10 +103,15 @@
 								<option value="fantasy">Fantasy</option>
 							</select>
 						</div>
+						
+						Wykomentowałam to, bo robienie podwójnego filtra to imo trochę sporo kombinowania. Jak masz pomysł, to można przywrócić, ale
+						ja bym się nie bawiła w to.-->
+
 						<div class="col-md-6" style="margin-top: 20px;">
-							<label for="about">Filtruj po:</label>
-							<select name="about" id="about" style="border:0; outline:0; background-color:#fff;">
-								<option value="myRating">Mojej ocenie</option>
+							<label for="about">Sortuj po:</label>
+							<select name="about" id="about" style="border:0; outline:0; background-color:#fff;" onchange="this.form.submit()">
+								<option value="none" selected hidden>Sortuj</option>
+								<option value="userRating">Mojej ocenie</option>
 								<option value="rating">Ocenie użytkowników</option>
 							</select>
 						</div>	
@@ -114,110 +120,74 @@
 			</section>
 			<section class="col-12 pb-4">
 			
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;">Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">
-						<fieldset class="rating">
-							<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
-							<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half"></label>
-							<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4"></label>
-							<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half"></label>
-							<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3"></label>
-							<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half"></label>
-							<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
-							<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half"></label>
-							<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1"></label>
-							<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"></label>
+			<?php
+				require_once "connect.php";
+
+				$connect = @new mysqli($host, $db_user, $db_password, $db_name);
+
+				if ($connect->connect_errno != 0) {
+					echo "Error: " . $connect->connect_errno;
+				} else {
+
+					if (isset($_GET['about']))
+					{
+						$selected_order= $_GET['about'];						
+
+							$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating
+							FROM anime						
+							INNER JOIN ratedanime ON anime.id=ratedanime.animeID
+							INNER JOIN users ON users.id = ratedanime.userID
+							ORDER BY $selected_order DESC;";	
+												
+					}
+					else
+					{
+
+						$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating
+						FROM anime				
+							INNER JOIN ratedanime ON anime.id=ratedanime.animeID
+							INNER JOIN users ON users.id = ratedanime.userID
+							ORDER BY userRating DESC;";
+						
+					}
+
+					$result = mysqli_query($connect, $sql);
+					echo "<div class='divider'></div>";
+
+
+					if (mysqli_num_rows($result) > 0) {
+
+						while ($row = mysqli_fetch_assoc($result))
+							{
+							echo
+								"<div class='row d-flex justify-content-around'>
+
+
+					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+
+					<div class='my-auto'>
+						<fieldset class='rating'>
+							<input type='radio' id='star5' name='rating' value='5' /><label class='full' for='star5'></label>
+							<input type='radio' id='star4half' name='rating' value='4 and a half' /><label class='half' for='star4half'></label>
+							<input type='radio' id='star4' name='rating' value='4' /><label class='full' for='star4'></label>
+							<input type='radio' id='star3half' name='rating' value='3 and a half' /><label class='half' for='star3half'></label>
+							<input type='radio' id='star3' name='rating' value='3' /><label class='full' for='star3'></label>
+							<input type='radio' id='star2half' name='rating' value='2 and a half' /><label class='half' for='star2half'></label>
+							<input type='radio' id='star2' name='rating' value='2' /><label class='full' for='star2'></label>
+							<input type='radio' id='star1half' name='rating' value='1 and a half' /><label class='half' for='star1half'></label>
+							<input type='radio' id='star1' name='rating' value='1' /><label class='full' for='star1'></label>
+							<input type='radio' id='starhalf' name='rating' value='half' /><label class='half' for='starhalf'></label>
 						</fieldset>
 					</div>
 				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;">Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">
-						<fieldset class="rating">
-							<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
-							<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half"></label>
-							<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4"></label>
-							<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half"></label>
-							<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3"></label>
-							<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half"></label>
-							<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
-							<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half"></label>
-							<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1"></label>
-							<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"></label>
-						</fieldset>
-					</div>
-				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;">Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">
-						<fieldset class="rating">
-							<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
-							<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half"></label>
-							<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4"></label>
-							<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half"></label>
-							<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3"></label>
-							<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half"></label>
-							<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
-							<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half"></label>
-							<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1"></label>
-							<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"></label>
-						</fieldset>
-					</div>
-				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;">Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">
-						<fieldset class="rating">
-							<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
-							<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half"></label>
-							<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4"></label>
-							<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half"></label>
-							<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3"></label>
-							<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half"></label>
-							<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
-							<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half"></label>
-							<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1"></label>
-							<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"></label>
-						</fieldset>
-					</div>
-				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;">Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-					<div class="my-auto">
-						<fieldset class="rating">
-							<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
-							<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half"></label>
-							<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4"></label>
-							<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half"></label>
-							<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3"></label>
-							<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half"></label>
-							<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
-							<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half"></label>
-							<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1"></label>
-							<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"></label>
-						</fieldset>
-					</div>
-				</div>
-					
-				<div class="divider"></div>
+
+				<div class='divider'></div>";
+							}
+						}
+
+				}
+				?>
 						
 			</section>
 		</div>

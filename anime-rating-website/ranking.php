@@ -99,65 +99,97 @@
 					<div style="margin-top: 20px; margin-bottom: 20px;" class="row">
 						<div class="col-md-6" style="margin-top: 20px;">
 							<label for="categories">Filtruj kategorie:</label>
-							<select name="categories" id="categories" style="border:0; outline:0; background-color:#fff;">
-								<option value="action">Akcja</option>
-								<option value="adventure">Bajka przygodowa</option>
-								<option value="comedy">Komedia</option>
-								<option value="drama">Dramat</option>
-								<option value="fantasy">Fantasy</option>
+							<select name="categories" id="categories" style="border:0; outline:0; background-color:#fff"; onchange="this.form.submit()">
+								<option value="none" selected hidden>Kategorie</option>
+								<option value="1">Akcja</option>
+								<option value="2">Bajka przygodowa</option>
+								<option value="3">Komedia</option>
+								<option value="4">Dramat</option>
+								<option value="5">Fantasy</option>
 							</select>
 						</div>	
 					</div>
 				</form>
 			</section>
+
+			<!-- ANIME LIST -->
+
 			<section class="col-12 pb-4">
+
+			<?php
+				require_once "connect.php";
+
+				$connect = @new mysqli($host, $db_user, $db_password, $db_name);
+
+				if ($connect->connect_errno != 0) {
+					echo "Error: " . $connect->connect_errno;
+				} else {
+					
+
+					if (isset($_GET['categories']))
+					{
+						$selected_cat = $_GET['categories'];						
+
+							$sql = "SELECT anime.title as title, anime.rating as rating, categories.id as categoryID
+							FROM anime						
+							INNER JOIN categories ON anime.categoryID=categories.ID
+							WHERE categoryID = $selected_cat
+							ORDER BY rating DESC;";											
+					}
+					else
+					{
+
+						$sql = "SELECT anime.title as title, anime.rating as rating
+						FROM anime
+						ORDER BY rating DESC;";
+						
+					}
+					
+					$result = mysqli_query($connect, $sql);
+					echo "<div class='divider'></div>";
+
+
+					if (mysqli_num_rows($result) > 0) {
+
+						
+						// show anime list for guests
+						if (!isset($_SESSION['logged'])) {
+							while ($row = mysqli_fetch_assoc($result)) {
+
+								echo
+									"<div class='row d-flex justify-content-around'>
+							<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+						</div>
+					
+				<div class='divider'></div>";
+							}
+
+							//show anime list for users
+						} else if (isset($_SESSION['logged'])) {
+
+							while ($row = mysqli_fetch_assoc($result))
+							{
+							echo
+								"<div class='row d-flex justify-content-around'>
+					<div class='my-auto'>
+						<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
+							<i class='fas fa-plus-circle'></i>
+						</button>
+					</div>
+
+					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+					
+				</div>
+
+				<div class='divider'></div>";
+							}
+						}
+					}
+				}
+				?>
 			
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto">
-						<span class="checkboxAddToList">
-							<input class="checkboxAddToList-element" type="checkbox"/>  
-							<i class="fas fa-plus-circle"></i>
-						</span>
-					</div>
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>1. </span>Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto">
-						<span class="checkboxAddToList">
-							<input class="checkboxAddToList-element" type="checkbox"/>  
-							<i class="fas fa-plus-circle"></i>
-						</span>
-					</div>
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>2. </span>Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>3. </span>Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>4. </span>Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-				</div>
-					
-				<div class="divider"></div>
-				
-				<div class="row d-flex justify-content-around">
-					<div class="my-auto"><a href="animeDescription.php" style="font-weight: 700;"><span>5. </span>Sword Art Online</a></div>
-					<div class="my-auto">Ocena użytkowników: <span>4</span>/5</div>
-				</div>
-					
-				<div class="divider"></div>
 						
 			</section>
 		</div>
