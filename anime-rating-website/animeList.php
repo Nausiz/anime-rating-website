@@ -97,9 +97,9 @@
 					<div style="margin-top: 20px; margin-bottom: 20px;" class="row">
 						<div class="col-md-6" style="text-align: center;">
 							<div class="searchDiv">
-								<input type="text" class="form-control form-control-sm eventPlaceholder" placeholder="Szukaj anime..." aria-label="candidate name" aria-describedby="basic-addon2" style="border: none; margin: 10px;">
+								<input type="text" name="search" id="search" class="form-control form-control-sm eventPlaceholder" placeholder="Szukaj anime..." aria-label="candidate name" aria-describedby="basic-addon2" style="border: none; margin: 10px;">
 								<div class="input-group-append" style="width: 100px; margin-right: 5px;">
-									<button class="btn btn-sm btn-search my-0" type="button">Szukaj</button>
+									<button class="btn btn-sm btn-search my-0" type="submit">Szukaj</button>
 								</div>
 							</div>
 						</div>
@@ -129,21 +129,33 @@
 				} else {
 					
 
-					if (isset($_GET['categories']))
+					if(isset($_GET['categories']) && isset($_GET['search']))
 					{
-						$selected_cat = $_GET['categories'];						
+						$selected_cat = $_GET['categories'];
+						$phrase = 	$_GET['search'];					
 
-							$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID
+						if ($selected_cat != "none")
+						{
+							$sql = "SELECT anime.id as id, anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID
 							FROM anime						
 							INNER JOIN categories ON anime.categoryID=categories.ID
-							WHERE categoryID = $selected_cat;";
-						
+							WHERE categoryID = $selected_cat AND title LIKE '%$phrase%';";
+						}
+
+						else
+						{
+							$sql = "SELECT anime.id as id, anime.title as title, anime.rating as rating, categories.name as category
+						FROM anime
+						INNER JOIN categories ON anime.categoryID=categories.ID
+						WHERE title LIKE '%$phrase%';";
+						}
 						
 					}
+
 					else
 					{
 
-						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category
+						$sql = "SELECT anime.id as id, anime.title as title, anime.rating as rating, categories.name as category
 						FROM anime
 						INNER JOIN categories ON anime.categoryID=categories.ID;";
 						
@@ -181,7 +193,7 @@
 						</button>
 					</div>
 
-					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+					<div class='my-auto'><a href='animeDescription.php?anime=".$row["id"]."' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 						<div class='my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
 
