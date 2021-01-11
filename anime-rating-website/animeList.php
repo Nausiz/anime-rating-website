@@ -51,6 +51,7 @@
 				echo	'<a href="register.php" class="btn btn-light mr-2">Zarejestruj</a>';
 				echo '</div>';
 			} else if (isset($_SESSION['logged'])) {
+				$userId = $_SESSION['id'];
 				echo '<div class="ml-auto">';
 				echo	'<ul class="navbar-nav">';
 				echo		'<li class="nav-item dropdown">';
@@ -98,7 +99,7 @@
 								</div>
 							</div>
 						</div>
-					
+
 						<div class="col-md-6" style="margin-top: 20px;">
 							<label for="categories">Filtruj kategorie:</label>
 							<select name="categories" id="categories" style="border:0; outline:0; background-color:#fff;" onchange="this.form.submit()">
@@ -122,46 +123,53 @@
 				if ($connect->connect_errno != 0) {
 					echo "Error: " . $connect->connect_errno;
 				} else {
-					
 
-					if(isset($_GET['categories']) && isset($_GET['search']))
-					{
+					// Create main query depending on filters
+
+					if (isset($_GET['categories']) && isset($_GET['search'])) {
 						$selected_cat = $_GET['categories'];
-						$phrase = 	$_GET['search'];					
+						$phrase = 	$_GET['search'];
 
-						if ($selected_cat != "none")
-						{
+						if ($selected_cat != "none") {
 							$sql = "SELECT anime.id as id, anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID
 							FROM anime						
 							INNER JOIN categories ON anime.categoryID=categories.ID
 							WHERE categoryID = $selected_cat AND title LIKE '%$phrase%';";
-						}
-
-						else
-						{
+						} else {
 							$sql = "SELECT anime.id as id, anime.title as title, anime.rating as rating, categories.name as category
 						FROM anime
 						INNER JOIN categories ON anime.categoryID=categories.ID
 						WHERE title LIKE '%$phrase%';";
 						}
-						
-					}
-
-					else
-					{
+					} else {
 
 						$sql = "SELECT anime.id as id, anime.title as title, anime.rating as rating, categories.name as category
 						FROM anime
 						INNER JOIN categories ON anime.categoryID=categories.ID;";
-						
 					}
-					
+
+
+					// Insert anime into my list
+
+					if (isset($_GET['animeId'])) {
+						$animeId = $_GET['animeId'];
+						$insert = "INSERT INTO listedanime (userID, animeID) VALUES ($userId, $animeId)";
+
+						if ($connect->query($insert) === TRUE) {
+						} else {
+							echo "Error deleting record: " . $conn->error;
+						}
+					}
+
+					// Show list results
+
 					$result = mysqli_query($connect, $sql);
 					echo "<div class='divider'></div>";
 
-
 					if (mysqli_num_rows($result) > 0) {
-						// show anime list for guests
+
+						// List for guests
+
 						if (!isset($_SESSION['logged'])) {
 							while ($row = mysqli_fetch_assoc($result)) {
 
@@ -175,20 +183,38 @@
 				<div class='divider'></div>";
 							}
 
-							//show anime list for users
+							//List for users
+
 						} else if (isset($_SESSION['logged'])) {
 
-							while ($row = mysqli_fetch_assoc($result))
-							{
-							echo
-								"<div class='row text-center'>
-					<div class='col-1'>
-						<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
-							<i class='fas fa-plus-circle'></i>
-						</button>
-					</div>
+							while ($row = mysqli_fetch_assoc($result)) {
 
-					<div class='col-3'><a href='animeDescription.php?anime=".$row["id"]."' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+								// chceck if user has anime i their list
+								$sql = "SELECT listedanime.id FROM listedanime WHERE listedanime.userID = $userId AND listedanime.animeID = " . $row["id"];
+								$exists = mysqli_query($connect, $sql);
+
+								echo "
+								<form>
+								<div class='row text-center'>
+								<div class='col-1'>";
+								// disable 'add' button if anime already exists on user's list
+								if (mysqli_num_rows($exists) > 0) {
+									echo "<button type='button' disabled style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
+									<i class='fas fa-plus-circle'></i>
+									</button>";
+								} else {
+
+									echo "
+									<input type=hidden name=animeId value=" . $row["id"] . ">
+									<button type='submit' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
+									<i class='fas fa-plus-circle'></i>
+								</button>";
+								}
+
+								echo
+									"</div>
+
+					<div class='col-3'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 					<div class='col-3'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 					<div class='col-2'>Kategoria: <span>" . $row["category"] . "</span></div>
 
@@ -207,6 +233,7 @@
 						</fieldset>
 					</div>
 				</div>
+				</form>
 
 				<div class='divider'></div>";
 							}
@@ -218,6 +245,8 @@
 			</section>
 		</div>
 	</main>
+
+	<!-- footer -->
 
 	<footer class="text-center text-lg-start" style="background-color: #e3e3e3;">
 		<div class="text-center p-3 text-light" style="background-color: #202120;">

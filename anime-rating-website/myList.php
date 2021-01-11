@@ -123,7 +123,7 @@ if (!isset($_SESSION['logged'])) {
 					if (isset($_GET['categories'])) {
 						$selected_cat = $_GET['categories'];
 
-						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID
+						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID, listedanime.id as id
 							FROM anime						
 							INNER JOIN categories ON anime.categoryID=categories.ID
 							INNER JOIN listedanime ON anime.id=listedanime.animeID
@@ -131,12 +131,24 @@ if (!isset($_SESSION['logged'])) {
 							WHERE categoryID = $selected_cat;";
 					} else {
 
-						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category
+						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, listedanime.id as id
 						FROM anime
 						INNER JOIN categories ON anime.categoryID=categories.ID
 						INNER JOIN listedanime ON anime.id=listedanime.animeID
 						INNER JOIN users ON users.id=listedanime.userID;";
 					}
+
+					if(isset($_POST['id']))
+					{
+					$deletedId = $_POST['id'];
+					$delete = "DELETE FROM listedanime WHERE id= $deletedId";
+
+					if ($connect->query($delete) === TRUE) {
+						
+					  } else {
+						echo "Error deleting record: " . $conn->error;
+					  }
+					}					
 
 					$result = mysqli_query($connect, $sql);
 					echo "<div class='divider'></div>";
@@ -145,24 +157,33 @@ if (!isset($_SESSION['logged'])) {
 					if (mysqli_num_rows($result) > 0) {
 						// show anime list for guests
 
-						while ($row = mysqli_fetch_assoc($result)) {
+						while ($row = mysqli_fetch_assoc($result)) {							
 							echo
-								"<div class='row text-center'>
+								"<form method=post>
+								<div class='row text-center'>
 									<div class='col-1'>
-										<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
+										
+										<input type=hidden name=id value=".$row["id"].">
+										<button type='submit' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
 											<i class='fas fa-minus-circle'></i>
 										</button>
+										
+
 									</div>
 
 									<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 									<div class='col-3'>Kategoria: <span>" . $row["category"] . "</span></div>
 								</div>
+								</form>
 
 				<div class='divider'></div>";
-						}
-					}
+					
 				}
+
+				
+			}
+		}
 				?>
 
 
