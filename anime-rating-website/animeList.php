@@ -38,11 +38,6 @@
 					<li class="nav-item">
 						<a class="nav-link" href="ranking.php">Ranking</a>
 					</li>
-					<li class="nav-item">
-						<form class="form-inline my-2 my-md-0 ml-auto" action="animeList.php" method="get">
-							<input class="form-control search" type="text" placeholder=" Szukaj" style="font-family:Calibri, FontAwesome" name="search"/>
-						</form>
-					</li>
 				</ul>
 			</div>
 
