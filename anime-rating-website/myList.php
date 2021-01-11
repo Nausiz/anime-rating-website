@@ -48,11 +48,6 @@ if (!isset($_SESSION['logged'])) {
 					<li class="nav-item">
 						<a class="nav-link" href="ranking.php">Ranking</a>
 					</li>
-					<li class="nav-item">
-						<form class="form-inline my-2 my-md-0 ml-auto">
-							<input class="form-control search" type="text" placeholder=" Szukaj" style="font-family:Calibri, FontAwesome" />
-						</form>
-					</li>
 				</ul>
 			</div>
 
@@ -152,17 +147,17 @@ if (!isset($_SESSION['logged'])) {
 
 						while ($row = mysqli_fetch_assoc($result)) {
 							echo
-								"<div class='row d-flex justify-content-around'>
-					<div class='my-auto'>
-						<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
-							<i class='fas fa-minus-circle'></i>
-						</button>
-					</div>
+								"<div class='row text-center'>
+									<div class='col-1'>
+										<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
+											<i class='fas fa-minus-circle'></i>
+										</button>
+									</div>
 
-					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-						<div class='my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
-				</div>
+									<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+									<div class='col-3'>Kategoria: <span>" . $row["category"] . "</span></div>
+								</div>
 
 				<div class='divider'></div>";
 						}

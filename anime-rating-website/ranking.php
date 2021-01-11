@@ -37,11 +37,6 @@
 				<li class="nav-item">
 				  <a class="nav-link active" href="ranking.php">Ranking</a>
 				</li>
-				<li class="nav-item">
-					<form class="form-inline my-2 my-md-0 ml-auto">
-						<input class="form-control search" type="text" placeholder=" Szukaj" style="font-family:Calibri, FontAwesome"/>
-					</form>
-				</li>
 			  </ul>
 			</div>
 			
@@ -157,10 +152,10 @@
 							while ($row = mysqli_fetch_assoc($result)) {
 
 								echo
-									"<div class='row d-flex justify-content-around'>
-							<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-						</div>
+									"<div class='row text-center'>
+										<div class='col-6'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+										<div class='col-6'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+									</div>
 					
 				<div class='divider'></div>";
 							}
@@ -171,17 +166,17 @@
 							while ($row = mysqli_fetch_assoc($result))
 							{
 							echo
-								"<div class='row d-flex justify-content-around'>
-					<div class='my-auto'>
-						<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
-							<i class='fas fa-plus-circle'></i>
-						</button>
-					</div>
+								"<div class='row text-center'>
+									<div class='col-2'>
+										<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
+											<i class='fas fa-plus-circle'></i>
+										</button>
+									</div>
 
-					<div class='my-auto'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-						<div class='my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-					
-				</div>
+									<div class='col-5'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-5'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+									
+								</div>
 
 				<div class='divider'></div>";
 							}

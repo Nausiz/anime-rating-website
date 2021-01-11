@@ -45,10 +45,6 @@
 									<input style="width:15px; height: 15px;" type="checkbox" name="remember" />Zapamiętaj mnie
 								</label>
 							</div>
-							<div style="flex-grow: 1;">
-								<a href="#" style="font-size: 11px; opacity: 0.5;">Zapomniałeś
-									hasła?</a>
-							</div>
 							<div></div>
 						</div>
 						<input type="submit" value="Zaloguj" />
