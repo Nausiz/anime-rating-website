@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/e6c92d3f6a.js" crossorigin="anonymous"></script>
 
 </head>
@@ -219,18 +220,14 @@
 					<div class='col-2'>Kategoria: <span>" . $row["category"] . "</span></div>
 
 					<div class='col-lg-3'>
-						<fieldset class='rating'>
-							<input type='radio' id='star5' name='rating' value='5' /><label class='full' for='star5'></label>
-							<input type='radio' id='star4half' name='rating' value='4 and a half' /><label class='half' for='star4half'></label>
-							<input type='radio' id='star4' name='rating' value='4' /><label class='full' for='star4'></label>
-							<input type='radio' id='star3half' name='rating' value='3 and a half' /><label class='half' for='star3half'></label>
-							<input type='radio' id='star3' name='rating' value='3' /><label class='full' for='star3'></label>
-							<input type='radio' id='star2half' name='rating' value='2 and a half' /><label class='half' for='star2half'></label>
-							<input type='radio' id='star2' name='rating' value='2' /><label class='full' for='star2'></label>
-							<input type='radio' id='star1half' name='rating' value='1 and a half' /><label class='half' for='star1half'></label>
-							<input type='radio' id='star1' name='rating' value='1' /><label class='full' for='star1'></label>
-							<input type='radio' id='starhalf' name='rating' value='half' /><label class='half' for='starhalf'></label>
-						</fieldset>
+						<label for='rate'>Twoja ocena:</label>
+						<select>
+							<option id='rate' value=1>1 gwiazdka</option>
+							<option id='rate' value=2>2 gwiazdki</option>
+							<option id='rate' value=3>3 gwiazdki</option>
+							<option id='rate' value=4>4 gwiazdki</option>
+							<option id='rate' value=5>5 gwiazdek</option>
+						</select>
 					</div>
 				</div>
 				</form>
@@ -258,6 +255,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity "sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="js/bootstrap.min.js"></script>
+	
 </body>
 
 </html>
