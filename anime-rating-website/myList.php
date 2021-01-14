@@ -161,7 +161,7 @@ if (!isset($_SESSION['logged'])) {
 
 									</div>
 
-									<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-4'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 									<div class='col-3'>Kategoria: <span>" . $row["category"] . "</span></div>
 								</div>

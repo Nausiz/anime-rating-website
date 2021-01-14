@@ -210,7 +210,7 @@
 
 								echo
 									"<div class='row text-center'>
-										<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+										<div class='col-4'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 										<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 										<div class='col-4'>Kategoria: <span>" . $row["category"] . "</span></div>
 									</div>
@@ -256,7 +256,7 @@
 					<div class='col-lg-3'>
 						<label for='rate'>Twoja ocena:</label>
 						<select name ='ratingSelect' id='ratingSelect' onchange='this.form.submit()'>
-							<option value='none' selected hidden>Kategorie</option>
+							<option value='none' selected hidden>Ocena</option>
 							<option id='rate' value=1>1 gwiazdka</option>
 							<option id='rate' value=2>2 gwiazdki</option>
 							<option id='rate' value=3>3 gwiazdki</option>

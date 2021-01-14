@@ -114,7 +114,7 @@
 					{
 						$selected_order= $_GET['about'];						
 
-							$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating
+							$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating, anime.id as id
 							FROM ratedanime
 							INNER JOIN anime ON ratedanime.animeID = anime.id
 							WHERE ratedanime.userID = $userId
@@ -124,7 +124,7 @@
 					else
 					{
 
-						$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating				
+						$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating, anime.id as id				
 							FROM ratedanime
 							INNER JOIN anime ON ratedanime.animeID = anime.id
 							WHERE ratedanime.userID = $userId
@@ -142,7 +142,7 @@
 							{
 							echo
 								"<div class='row text-center'>
-									<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-4'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 									<div class='col-4'>Twoja ocena to: " . $row["userRating"] . " <i class='fas fa-star' style='color: #f5e042;'></i></div>
 								</div>

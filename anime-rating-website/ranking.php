@@ -125,7 +125,7 @@
 					{
 						$selected_cat = $_GET['categories'];						
 
-							$sql = "SELECT anime.title as title, anime.rating as rating, categories.id as categoryID
+							$sql = "SELECT anime.title as title, anime.rating as rating, categories.id as categoryID, anime.id as id
 							FROM anime						
 							INNER JOIN categories ON anime.categoryID=categories.ID
 							WHERE categoryID = $selected_cat
@@ -134,7 +134,7 @@
 					else
 					{
 
-						$sql = "SELECT anime.title as title, anime.rating as rating
+						$sql = "SELECT anime.title as title, anime.rating as rating, anime.id as id
 						FROM anime
 						ORDER BY rating DESC;";
 						
@@ -153,7 +153,7 @@
 
 								echo
 									"<div class='row text-center'>
-										<div class='col-6'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+										<div class='col-6'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 										<div class='col-6'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 									</div>
 					
@@ -173,7 +173,7 @@
 										</button>
 									</div>
 
-									<div class='col-5'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-5'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 									<div class='col-5'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 									
 								</div>

@@ -130,21 +130,21 @@
 							<img src="img/slide1.jpg" class="img-fluid">
 							<figcaption><p class="mt-4" style="font-size:14px; font-weight: 800;">LOREM IPSUM DOLOR SIT AMET,</p><p style="font-size:14px; font-weight: 500;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec consectetur purus, eget sodales orci. Nam vel malesuada neque. Nam pulvinar pharentra pellentresque. Pellentresque a leo non elit viverra cursus in sit amet arcu.</p>
 
-							<a href="animeDescription.php"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
+							<a href="animeDescription.php?anime=4"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
 						</figure>
 						
 						<figure class="col-sm-9 col-md-5 col-lg-3 mx-auto">
 							<img src="img/slide2.jpg" class="img-fluid">
 							<figcaption><p class="mt-4" style="font-size:14px; font-weight: 800;">LOREM IPSUM DOLOR SIT AMET,</p><p style="font-size:14px; font-weight: 500;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec consectetur purus, eget sodales orci. Nam vel malesuada neque. Nam pulvinar pharentra pellentresque. Pellentresque a leo non elit viverra cursus in sit amet arcu.</p>
 
-							<a href="animeDescription.php"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
+							<a href="animeDescription.php?anime=2"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
 						</figure>
 						
 						<figure class="col-sm-9 col-md-5 col-lg-3 mx-auto">
 							<img src="img/slide3.jpg" class="img-fluid">
 							<figcaption><p class="mt-4" style="font-size:14px; font-weight: 800;">LOREM IPSUM DOLOR SIT AMET,</p><p style="font-size:14px; font-weight: 500;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec consectetur purus, eget sodales orci. Nam vel malesuada neque. Nam pulvinar pharentra pellentresque. Pellentresque a leo non elit viverra cursus in sit amet arcu.</p>
 
-								<a href="animeDescription.php"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
+								<a href="animeDescription.php?anime=3"><p style="font-weight: bold; color: #6d7eed;">Czytaj dalej</p></a></figcaption>
 						</figure>
 					</div>
 				</div>
