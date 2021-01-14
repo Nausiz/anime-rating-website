@@ -88,20 +88,6 @@
 				<form>
 					<div style="margin-top: 20px; margin-bottom: 20px;" class="row">
 
-						<!--<div class="col-md-6" style="margin-top: 20px;">
-							<label for="categories">Filtruj kategorie:</label>
-							<select name="categories" id="categories" style="border:0; outline:0; background-color:#fff;">
-								<option value="action">Akcja</option>
-								<option value="adventure">Bajka przygodowa</option>
-								<option value="comedy">Komedia</option>
-								<option value="drama">Dramat</option>
-								<option value="fantasy">Fantasy</option>
-							</select>
-						</div>
-						
-						Wykomentowałam to, bo robienie podwójnego filtra to imo trochę sporo kombinowania. Jak masz pomysł, to można przywrócić, ale
-						ja bym się nie bawiła w to.-->
-
 						<div class="col-md-6" style="margin-top: 20px;">
 							<label for="about">Sortuj po:</label>
 							<select name="about" id="about" style="border:0; outline:0; background-color:#fff;" onchange="this.form.submit()">
@@ -123,25 +109,25 @@
 				if ($connect->connect_errno != 0) {
 					echo "Error: " . $connect->connect_errno;
 				} else {
-
+					$userId = $_SESSION['id'];
 					if (isset($_GET['about']))
 					{
 						$selected_order= $_GET['about'];						
 
 							$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating
-							FROM anime						
-							INNER JOIN ratedanime ON anime.id=ratedanime.animeID
-							INNER JOIN users ON users.id = ratedanime.userID
+							FROM ratedanime
+							INNER JOIN anime ON ratedanime.animeID = anime.id
+							WHERE ratedanime.userID = $userId
 							ORDER BY $selected_order DESC;";	
 												
 					}
 					else
 					{
 
-						$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating
-						FROM anime				
-							INNER JOIN ratedanime ON anime.id=ratedanime.animeID
-							INNER JOIN users ON users.id = ratedanime.userID
+						$sql = "SELECT anime.title as title, anime.rating as rating, ratedanime.userRating as userRating				
+							FROM ratedanime
+							INNER JOIN anime ON ratedanime.animeID = anime.id
+							WHERE ratedanime.userID = $userId
 							ORDER BY userRating DESC;";
 						
 					}
@@ -158,7 +144,7 @@
 								"<div class='row text-center'>
 									<div class='col-4'><a href='animeDescription.php' style='font-weight: 700;'>" . $row["title"] . "</a></div>
 									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-									<div class='col-4'>Twoja ocena to: " . $row["rating"] . " <i class='fas fa-star' style='color: #f5e042;'></i></div>
+									<div class='col-4'>Twoja ocena to: " . $row["userRating"] . " <i class='fas fa-star' style='color: #f5e042;'></i></div>
 								</div>
 
 				<div class='divider'></div>";

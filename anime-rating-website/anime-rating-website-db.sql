@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 11 Sty 2021, 01:34
+-- Czas generowania: 14 Sty 2021, 18:11
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.10
 
@@ -39,28 +39,27 @@ CREATE TABLE `anime` (
 --
 
 INSERT INTO `anime` (`id`, `title`, `categoryID`, `rating`) VALUES
-(1, 'Sword Art Online', 1, 5),
-(2, 'Hellsing Ultimate', 5, 5),
-(3, 'Sirius the Jaeger', 1, 0),
+(2, 'Hellsing Ultimate', 5, 0),
+(3, 'Sirius the Jaeger', 1, 4),
 (4, 'JoJo\'s Bizarre', 1, 0),
-(5, 'Dragon\'s Dogma', 1, 0),
+(5, 'Dragon\'s Dogma', 1, 2),
 (6, 'Boku no Hero Academia', 1, 0),
-(7, 'Castlevania', 1, 3),
-(8, 'Fullmetal Alchemist: Brotherhood', 2, 0),
+(7, 'Castlevania', 1, 0),
+(8, 'Fullmetal Alchemist: Brotherhood', 2, 4),
 (9, 'Hunter x Hunter', 2, 0),
 (10, 'Sword Art Online', 2, 0),
 (11, 'Naruto', 2, 0),
 (12, 'No Game No Life', 2, 0),
-(13, 'Cromartie High School', 3, 0),
-(14, 'Level e', 3, 2.5),
+(13, 'Cromartie High School', 3, 3),
+(14, 'Level e', 3, 3),
 (15, 'Gintama', 3, 0),
-(16, 'Tamako Market', 3, 0),
+(16, 'Tamako Market', 3, 1),
 (17, 'The Disastrous Life of Saiki K.', 3, 0),
 (18, 'Shingeki no Kyojin', 4, 0),
 (19, 'Tokyo Ghoul', 4, 0),
 (20, ' Kimi no Na wa.', 4, 0),
 (21, 'Angel Beats!', 4, 0),
-(22, 'Code Geass: Hangyaku no Lelouch', 4, 0);
+(22, 'Code Geass: Hangyaku no Lelouch', 4, 5);
 
 -- --------------------------------------------------------
 
@@ -91,6 +90,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `listedanime` (
+  `id` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `animeID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -99,12 +99,21 @@ CREATE TABLE `listedanime` (
 -- Zrzut danych tabeli `listedanime`
 --
 
-INSERT INTO `listedanime` (`userID`, `animeID`) VALUES
-(14, 20),
-(14, 22),
-(14, 12),
-(14, 15),
-(14, 11);
+INSERT INTO `listedanime` (`id`, `userID`, `animeID`) VALUES
+(2, 14, 22),
+(7, 14, 4),
+(9, 15, 7),
+(10, 15, 5),
+(11, 15, 16),
+(14, 14, 3),
+(15, 14, 6),
+(18, 14, 13),
+(19, 14, 5),
+(20, 15, 22),
+(21, 15, 6),
+(22, 15, 8),
+(23, 15, 11),
+(24, 14, 7);
 
 -- --------------------------------------------------------
 
@@ -124,8 +133,14 @@ CREATE TABLE `ratedanime` (
 --
 
 INSERT INTO `ratedanime` (`id`, `animeID`, `userID`, `userRating`) VALUES
-(1, 22, 14, 4),
-(2, 9, 14, 3.5);
+(11, 5, 15, 2),
+(12, 8, 15, 5),
+(13, 13, 15, 3),
+(14, 14, 15, 3),
+(15, 22, 15, 5),
+(16, 3, 15, 4),
+(17, 8, 14, 3),
+(18, 16, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -169,6 +184,7 @@ ALTER TABLE `categories`
 -- Indeksy dla tabeli `listedanime`
 --
 ALTER TABLE `listedanime`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `animeID` (`animeID`),
   ADD KEY `userID` (`userID`);
 
@@ -203,10 +219,16 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT dla tabeli `listedanime`
+--
+ALTER TABLE `listedanime`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT dla tabeli `ratedanime`
 --
 ALTER TABLE `ratedanime`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`

@@ -97,13 +97,6 @@ if (!isset($_SESSION['logged'])) {
 								<option value="5">Fantasy</option>
 							</select>
 						</div>
-						<!---<div class="col-md-6" style="margin-top: 20px;">
-							<label for="about">Filtruj po:</label>
-							<select name="about" id="about" style="border:0; outline:0; background-color:#fff;">
-								<option value="date">Dacie dodania</option>
-								<option value="rating">Ocenie</option>
-							</select>
-						</div>  I to też w sumie wykomentowałam z tego samego powodu, co w ratingu-->
 					</div>
 				</form>
 			</section>
@@ -120,15 +113,14 @@ if (!isset($_SESSION['logged'])) {
 
 					$userId = $_SESSION['id'];
 					if (isset($_GET['categories'])) {
-						
-						$selected_cat = $_GET['categories'];					
+
+						$selected_cat = $_GET['categories'];
 
 						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, categories.id as categoryID, listedanime.id as id, listedanime.userID as usid
 						FROM listedanime
 						INNER JOIN anime ON listedanime.animeID = anime.id
 						INNER JOIN categories ON anime.categoryID = categories.id
 						WHERE listedanime.userID = $userId AND categoryID = $selected_cat;";
-
 					} else {
 
 						$sql = "SELECT anime.title as title, anime.rating as rating, categories.name as category, listedanime.id as id, listedanime.userID as usid
@@ -136,39 +128,32 @@ if (!isset($_SESSION['logged'])) {
 						INNER JOIN anime ON listedanime.animeID = anime.id
 						INNER JOIN categories ON anime.categoryID = categories.id
 						WHERE listedanime.userID = $userId;";
-						
-						
-						
 					}
 
-					if(isset($_POST['id']))
-					{
-					$deletedId = $_POST['id'];
-					$delete = "DELETE FROM listedanime WHERE id= $deletedId";
+					if (isset($_POST['id'])) {
+						$deletedId = $_POST['id'];
+						$delete = "DELETE FROM listedanime WHERE id= $deletedId";
 
-					if ($connect->query($delete) === TRUE) {
-						
-					  } else {
-						echo "Error deleting record: " . $conn->error;
-					  }
-					}					
+						if ($connect->query($delete) === TRUE) {
+						} else {
+							echo "Error deleting record: " . $conn->error;
+						}
+					}
 
 					$result = mysqli_query($connect, $sql);
 					echo "<div class='divider'></div>";
 
 
 					if (mysqli_num_rows($result) > 0) {
-						
+
 
 						while ($row = mysqli_fetch_assoc($result)) {
-							echo $row["id"];							
-							echo"\t";
 							echo
 								"<form method=post>
 								<div class='row text-center'>
 									<div class='col-1'>
 										
-										<input type=hidden name=id value=".$row["id"].">
+										<input type=hidden name=id value=" . $row["id"] . ">
 										<button type='submit' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
 											<i class='fas fa-minus-circle'></i>
 										</button>
@@ -183,12 +168,9 @@ if (!isset($_SESSION['logged'])) {
 								</form>
 
 				<div class='divider'></div>";
-					
+						}
+					}
 				}
-
-				
-			}
-		}
 				?>
 
 

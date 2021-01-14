@@ -149,16 +149,50 @@
 						INNER JOIN categories ON anime.categoryID=categories.ID;";
 					}
 
+					// Insert into rated list
+					if (isset($_POST['animeId'])) {
+						$animeId = $_POST['animeId'];
+						$myRating = $_POST['ratingSelect'];
 
-					// Insert anime into my list
+						if (isset($_POST['animeId']) && $_POST['ratingSelect'] != 'none') {
+							$rating_sql = "SELECT ratedanime.id FROM ratedanime WHERE ratedanime.userID = $userId AND ratedanime.animeID = $animeId";
+							$exists = mysqli_query($connect, $rating_sql);
 
-					if (isset($_GET['animeId'])) {
-						$animeId = $_GET['animeId'];
-						$insert = "INSERT INTO listedanime (userID, animeID) VALUES ($userId, $animeId)";
+							if (mysqli_num_rows($exists) > 0) {
+								// update existing rating
+								$update = "UPDATE ratedanime SET userRating=$myRating WHERE ratedanime.userID = $userId AND ratedanime.animeID = $animeId";
+								if ($connect->query($update) === TRUE) {
+								} else {
+									echo "Error inserting record: " . $connect->error;
+								}
+							} else {
+								// insert new row into user's rated anime
+								$insert = "INSERT INTO ratedanime (userID, animeID, userRating) VALUES ($userId, $animeId, $myRating)";
 
-						if ($connect->query($insert) === TRUE) {
-						} else {
-							echo "Error deleting record: " . $conn->error;
+								if ($connect->query($insert) === TRUE) {
+								} else {
+									echo "Error inserting record: " . $connect->error;
+								}
+							}
+
+							// update general rating value
+							$ratingSum = "UPDATE anime SET rating=(SELECT AVG(userRating) FROM ratedanime WHERE ratedanime.animeID = $animeId) WHERE id = $animeId";
+
+							if ($connect->query($ratingSum) === TRUE) {
+							} else {
+								echo "Error deleting record: " . $connect->error;
+							}
+						}
+
+						// Insert anime into my list
+
+						else {
+							$insert = "INSERT INTO listedanime (userID, animeID) VALUES ($userId, $animeId)";
+
+							if ($connect->query($insert) === TRUE) {
+							} else {
+								echo "Error deleting record: " . $connect->error;
+							}
 						}
 					}
 
@@ -195,7 +229,8 @@
 								$exists = mysqli_query($connect, $sql);
 
 								echo "
-								<form>
+								<form method='POST'>
+								<input type=hidden name=animeId value=" . $row["id"] . ">
 								<div class='row text-center'>
 								<div class='col-1'>";
 								// disable 'add' button if anime already exists on user's list
@@ -205,8 +240,7 @@
 									</button>";
 								} else {
 
-									echo "
-									<input type=hidden name=animeId value=" . $row["id"] . ">
+									echo "									
 									<button type='submit' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
 									<i class='fas fa-plus-circle'></i>
 								</button>";
@@ -221,7 +255,8 @@
 
 					<div class='col-lg-3'>
 						<label for='rate'>Twoja ocena:</label>
-						<select>
+						<select name ='ratingSelect' id='ratingSelect' onchange='this.form.submit()'>
+							<option value='none' selected hidden>Kategorie</option>
 							<option id='rate' value=1>1 gwiazdka</option>
 							<option id='rate' value=2>2 gwiazdki</option>
 							<option id='rate' value=3>3 gwiazdki</option>
@@ -255,7 +290,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity "sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+
 </body>
 
 </html>
