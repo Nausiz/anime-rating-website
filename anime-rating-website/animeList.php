@@ -210,9 +210,9 @@
 
 								echo
 									"<div class='row text-center'>
-										<div class='col-4'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-										<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-										<div class='col-4'>Kategoria: <span>" . $row["category"] . "</span></div>
+										<div class='col-4 my-auto'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+										<div class='col-4 my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+										<div class='col-4 my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
 									</div>
 					
 				<div class='divider'></div>";
@@ -232,7 +232,7 @@
 								<form method='POST'>
 								<input type=hidden name=animeId value=" . $row["id"] . ">
 								<div class='row text-center'>
-								<div class='col-1'>";
+								<div class='col-1 my-auto'>";
 								// disable 'add' button if anime already exists on user's list
 								if (mysqli_num_rows($exists) > 0) {
 									echo "<button type='button' disabled style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
@@ -249,11 +249,11 @@
 								echo
 									"</div>
 
-					<div class='col-3'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-					<div class='col-3'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-					<div class='col-2'>Kategoria: <span>" . $row["category"] . "</span></div>
+					<div class='col-3 my-auto'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+					<div class='col-3 my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+					<div class='col-2 my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
 
-					<div class='col-lg-3'>
+					<div class='col-lg-3 my-auto'>
 						<label for='rate'>Twoja ocena:</label>
 						<select name ='ratingSelect' id='ratingSelect' onchange='this.form.submit()'>
 							<option value='none' selected hidden>Ocena</option>

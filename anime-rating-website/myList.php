@@ -151,7 +151,7 @@ if (!isset($_SESSION['logged'])) {
 							echo
 								"<form method=post>
 								<div class='row text-center'>
-									<div class='col-1'>
+									<div class='col-1 my-auto'>
 										
 										<input type=hidden name=id value=" . $row["id"] . ">
 										<button type='submit' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
@@ -161,9 +161,9 @@ if (!isset($_SESSION['logged'])) {
 
 									</div>
 
-									<div class='col-4'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-									<div class='col-4'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
-									<div class='col-3'>Kategoria: <span>" . $row["category"] . "</span></div>
+									<div class='col-4 my-auto'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-4 my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+									<div class='col-3 my-auto'>Kategoria: <span>" . $row["category"] . "</span></div>
 								</div>
 								</form>
 

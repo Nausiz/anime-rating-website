@@ -153,8 +153,8 @@
 
 								echo
 									"<div class='row text-center'>
-										<div class='col-6'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-										<div class='col-6'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+										<div class='col-6 my-auto'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+										<div class='col-6 my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 									</div>
 					
 				<div class='divider'></div>";
@@ -167,14 +167,14 @@
 							{
 							echo
 								"<div class='row text-center'>
-									<div class='col-2'>
+									<div class='col-2 my-auto'>
 										<button type='button' style='border-radius: 25px; border: none; padding: 10px; color: #fff; background-color: #d7dbf5;'>
 											<i class='fas fa-plus-circle'></i>
 										</button>
 									</div>
 
-									<div class='col-5'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
-									<div class='col-5'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
+									<div class='col-5 my-auto'><a href='animeDescription.php?anime=" . $row["id"] . "' style='font-weight: 700;'>" . $row["title"] . "</a></div>
+									<div class='col-5 my-auto'>Ocena użytkowników: <span>" . $row["rating"] . "</span>/5</div>
 									
 								</div>
 

@@ -38,15 +38,6 @@
 					<form action="loginPhp.php" method="post" class="d-inline-block my-5 align-items-center">
 						<input type="email" name="email" placeholder="Adres e-mail" />
 						<input type="password" name="password" placeholder="Hasło" />
-						<div class="underInputs">
-							<div></div>
-							<div style="flex-grow: 1;">
-								<label style="font-size:11px; opacity: 0.5; padding-right:10px;">
-									<input style="width:15px; height: 15px;" type="checkbox" name="remember" />Zapamiętaj mnie
-								</label>
-							</div>
-							<div></div>
-						</div>
 						<input type="submit" value="Zaloguj" />
 					</form>
 <?php

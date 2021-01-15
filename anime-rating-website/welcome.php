@@ -79,7 +79,7 @@
 		<img class="col-12 px-0" src="img/stripe.jpg"></img>
 		<div class="container">
 			<section class="col-xl-8 pb-4">
-				<h3 class="my-4" style="font-weight: 700;">Witaj na anime-rating-website.com!</h3>
+				<h3 class="py-4" style="font-weight: 700;">Witaj na anime-rating-website.com!</h3>
 
 				<p class="mb-4" style="font-size:15px; font-weight: 700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac pretium nunc. Cras blandit non eros in interdum. Donec quis venenatis leo. Vestbulum condimentum</p>
 				
